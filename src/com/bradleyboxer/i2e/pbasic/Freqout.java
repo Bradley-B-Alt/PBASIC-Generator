@@ -22,23 +22,24 @@ public class Freqout {
 	
 	public boolean runFreqout(String directory) {
 		System.out.println(directory);
-		String csvFile = directory+"\\freqout.csv";
 	   	String line = "";
-	    String cvsSplitBy = ",";
+	    String csvSplitBy = ",";
+	    String inputDirectory = directory.replace("\\", "/"); //corrects the directory
+	    String outputDirectory = (inputDirectory.substring(0, inputDirectory.length()-4))+"-output.txt"; //gets the output filename
 	    BufferedReader br = null;
 	    
+	    
 	    try {  
-	      	br = new BufferedReader(new FileReader(csvFile));
+	      	br = new BufferedReader(new FileReader(inputDirectory));
 	        	
-	        String filepath = directory+"\\freqout-output.txt";
-        	File file = new File(filepath);
+        	File file = new File(outputDirectory);
         	FileWriter fw = new FileWriter(file, true);
         	BufferedWriter bw = new BufferedWriter(fw);
         	PrintWriter pw = new PrintWriter(bw, true);
         	file.createNewFile();	
 	        	
         	while ((line = br.readLine()) != null) {
-	        	String[] splitStrings = line.split(cvsSplitBy);
+	        	String[] splitStrings = line.split(csvSplitBy);
 	        	String freqOutput = null;
 	        	String timeOutput = null;
 	        	
